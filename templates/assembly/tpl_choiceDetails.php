@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<div class="top-menu">
+		<a href = "index.php" >Главная</a>->			
+		<a href= "" > Списание деталей </a> 
+	</div>
+	<hr>	
+	<div class="center-block">	
+		<div class="title">
+			<h3>Выберите модель или подсистему</h3>
+		</div>
+		<form action =" ?Info"  method="POST">		
+			<div class="center-block__row row">
+				<select class="form__select" name=id>								
+					<?php 
+						foreach ($models as $model):
+							echo("<option value = ".$model['id'].">".$model['name']."</option>");
+						endforeach;
+					?>								
+				</select>						
+				 <input class="btn btn-primary" type=submit name=send value= "Отправить">
+			</div>		
+			<div class = "error"><?php echo $error?></div>
+		</form>
+	</div>	
+</html>
