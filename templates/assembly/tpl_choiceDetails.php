@@ -13,7 +13,7 @@
 				<select class="form__select" name=id>								
 					<?php 
 						foreach ($models as $model):
-							echo("<option value = ".$model['id'].">".$model['name']."</option>");
+							echo("<option value = ".$model['Id_C'].">".$model['Name']."</option>");
 						endforeach;
 					?>								
 				</select>						

@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<div class="top-menu">
 		<a href = "index.php" >Главная</a>->			
-		<a href= "" > Склад</a> 
+		<a href= "storage.php" >Склад</a>
 	</div>
 	<hr>
 	<div class="title">
@@ -26,7 +26,7 @@
 				<td> Время инвентаризации </td>
 			</tr><?php foreach ($details as $detail):?>
 			<tr> 
-				<td> <?php echo $detail['name'];?></td>
+				<td> <?php echo $detail['name_c'];?></td>
 				<td>  <?php echo $detail['count'];?> </td>						
 				<td>  <?php echo $detail['time'];?> </td>
 			</tr><?php endforeach; ?>

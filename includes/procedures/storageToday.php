@@ -1,4 +1,4 @@
 <?php
 	$sql_query="Call storageToday()";
-	$pdo->query($sql_query);
+	$db->query($sql_query);
 ?>

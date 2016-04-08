@@ -2,7 +2,7 @@
 	<div class="top-menu">
 		<a href = "index.php" >Главная</a>->
 		<a  onclick="location.href=' ?Del'">Списание деталей</a>->
-		<a href= "" > <?php echo $model_name['Name']?> </a> 
+		<?php echo $model_name?>
 	</div>
 	<hr>
 	<div class="center-block">	
@@ -22,13 +22,13 @@
 			</tr>
 			<?php foreach ($details as $detail):?>
 			<tr>
-				<td> <?php echo $detail['name'];?> </td>
-				<td> <?php echo $detail['storage'];?></td>
-				<td> <?php echo $detail['count'];?> </td>				
+				<td> <?php echo $detail['Name'];?> </td>
+				<td> <?php echo $detail['count'];?></td>
+				<td> <?php echo $detail['Entities'];?> </td>
 				<td>
 					<form action =" ?Detail"  method="POST"> 
-						<input class="form__input" type="hidden" name="name" value=<?php echo $detail['name'] ?>>
-						<input class="form__input" type="number" name = "count" min="1" max=<?php echo $detail['storage'];?>>
+						<input class="form__input" type="hidden" name="name" value=<?php echo $detail['Name'] ?>>
+						<input class="form__input" type="number" name = "count" min="1" max=<?php echo $detail['Count'];?>>
 						<input class="btn btn-primary" type="submit" value="Добавить">						
 					</form>
 				</td>

@@ -1,16 +1,16 @@
 <?php
 session_start();
-include '../includes/dbconnect.php'; 
-include '../includes/execute_select.php';
+require('classes/dataBase.php');
+$db = DataBase::getDB();
 
-if(isset($_GET['Info'])){		
+if(isset($_GET['Info'])){
 	$_SESSION['model'] =  $_POST['id'];	
-	$sql = "SELECT Name FROM Component WHERE Id_C = ".$_SESSION['model']."";
-	$result = execute_select($pdo, $sql);
-	$_SESSION['model_name'] = $result->fetch();	
-} 
+	$sql = "SELECT Name FROM Component WHERE Id_C = {?}";
+	$_SESSION['model_name'] = $db->selectCell($sql, array($_SESSION['model']));
+}
 
-if(!isset($_SESSION['name'])){ //Если массив под названием item _id не инициализирован, то инициализаруем его	
+// если массив под названием item _id не инициализирован, то инициализаруем его
+if(!isset($_SESSION['name'])){
 	$_SESSION['name'] = array();
 	$_SESSION['count'] = array();
 } 
@@ -47,12 +47,13 @@ if(isset($_GET['Del'])){
 if(isset($_GET['Ok'])){	
 	for ($i = 0; $i < count($_SESSION['name']); $i++){		
 		try{
-			$sql= 'INSERT INTO expenditure 
-						SET component =:id_d, count=:count,  date=NOW()';
-			$s=$pdo->prepare($sql);
-			$s->bindValue(':id_d', $_SESSION['name'][$i]);			
-			$s->bindValue(':count', $_SESSION['count'][$i]);			
-			$s->execute();
+            $sql = "SELECT Id_C FROM component Where name={?}";
+            $id_detail = $db->selectCell($sql, array($_SESSION['name'][$i]));
+
+            $sql = "INSERT INTO expenditure 
+						SET component ={?}, count={?},  date=NOW()";
+            $last_id = $db->query($sql, array($id_detail, $_SESSION['count'][$i]));
+
 			for ($i = 0; $i < count($_SESSION['name']); $i++){		
 				$names[] = $_SESSION['name'][$i];
 				$count[] = $_SESSION['count'][$i];
@@ -64,10 +65,9 @@ if(isset($_GET['Ok'])){
 			$pagetitle = "Выбранные детали";
 			$tpl = "../templates/assembly/tpl_successDelete.php";
 			include '../templates/tpl_main.php';
-		
 			exit();
 		}
-		catch (PDOexception $e){
+		catch (ErrorException $e){
 			$output = 'Ошибка при добавлении записи о списании деталей в базу данных';
 			include '../includes/output.html.php';
 			exit(1);
@@ -75,16 +75,9 @@ if(isset($_GET['Ok'])){
 	}
 }
 
-if(!isset($_SESSION['model'])){	
-	
+if(!isset($_SESSION['model'])){
 	$sql = "SELECT Id_C, Name FROM Component WHERE is_atom != 1" ;
-	$result = execute_select($pdo, $sql);
-			
-	while ( $row = $result->fetch() ) {
-		$models[]=array('id'=>$row['Id_C'], 'name'=>$row['Name']);		
-	}
-		
-	$pdo = null;
+	$models = $db->select($sql);
 
 	$pagetitle = "Cписание деталей";
 	$tpl = "../templates/assembly/tpl_choiceDetails.php";
@@ -95,22 +88,18 @@ else{
 	$model_name = $_SESSION['model_name'];
 	// выбор имени и количества деталей(запрос работает только для подсистем)
 	$sql="SELECT  Name, Entities, count FROM tmp_detail_info JOIN tmp_storage_inventory ON Name = name_c 
-													WHERE parent_id = ".$id." AND time = (SELECT max(time) FROM tmp_storage_inventory)" ;
-	$result = execute_select($pdo, $sql);
+													WHERE parent_id ={?} AND time = (SELECT max(time) FROM tmp_storage_inventory)" ;
+	$details = $db->select($sql, array($id));
 	
 	// если модель - вернется пустой результат 
-	if(($result -> rowCount()) == 0){
+	if((count($details)) == 0){
 		$sql="SELECT  Name, Entities, count FROM tmp_detail_info JOIN tmp_storage_inventory ON Name = name_c 
-													WHERE parent_id = (SELECT tree_place FROM Model WHERE component_id = $id) 
+													WHERE parent_id = (SELECT tree_place FROM Model WHERE component_id = {?}) 
 													AND time = (SELECT max(time) FROM tmp_storage_inventory)" ;
-		$result = execute_select($pdo, $sql);
+		$details = $db->select($sql, array($id));
 	}	
 	
-	if(($result -> rowCount()) != 0){
-		while ( $row = $result->fetch()  ) {
-			$details[]=array('name'=>$row['Name'], 'count'=>$row['Entities'], 'storage'=>$row['count'] );
-		}
-		
+	if(( count($details)) != 0){
 		$pagetitle = "Cписание деталей";
 		$tpl = "../templates/assembly/tpl_detailShop.php";
 		include '../templates/tpl_main.php';

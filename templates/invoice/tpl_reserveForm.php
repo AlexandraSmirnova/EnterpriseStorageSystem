@@ -14,20 +14,20 @@
     <form action=" ?Info" method="POST">
         <table border=0 width=50% align=center>
             <tr width=25%>
-                <td align=right><label for="detail1"> Деталь*<label></td>
+                <td align=right><label for="detail1"> Модель*<label></td>
                 <td align=left>
-                    <select id="detail1" class="form__input form__input_wide" name=id_d>
+                    <select id="detail1" class="form__input form__input_wide" name=id_m>
                         <?php
-                        foreach ($details as $detail):
-                            echo("<option value = " . $detail['id'] . ">" . $detail['name'] . "</option>");
+                        foreach ($models as $model):
+                            echo("<option value = " . $model['Id_M'] . ">" . $model['Name'] . "</option>");
                         endforeach;
                         ?>
                     </select>
                 </td>
             </tr>
             <tr width=25%>
-                <td align=right> <label for="count1">Необходимое качество обслуживания P( < 1.0)<label></td>
-                <td align=left><input id="count1" class="form__input" type=text name=count required></td>
+                <td align=right> <label for="count1">Необходимое качество <br>обслуживания<br> P( < 1.0)<label></td>
+                <td align=left><input id="count1" class="form__input" type=number name=count min="0" max="1" step="0.01" required></td>
             </tr>
             <tr>
                 <td align=center><input class="btn btn-primary" type=reset value="Очистить"></td>

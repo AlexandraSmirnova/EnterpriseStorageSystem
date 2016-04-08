@@ -9,21 +9,19 @@ else{
 	exit();
 }
 
-include( "../includes/dbconnect.php" ); 
-include( "../includes/execute_select.php" );
-
-
+require('classes/dataBase.php');
+$db = DataBase::getDB();
 /**
  * @param $model_id
  */
 function ShowModel($model_id){
-	global $pdo; 
+	global $db;
 	
-	$sql = "SELECT * from tmp_index_tree WHERE rid = ".$model_id." ";
-	$result = execute_select($pdo, $sql);
+	$sql = "SELECT * from tmp_index_tree WHERE rid = {?} ";
+	$result = $db->select($sql, array($model_id));
 	
 	$lvl=0;
-	while ( $row = $result->fetch() ) {
+	foreach ( $result as $row ) {
 		if($row["level"] > $lvl){
 			$lvl++;
 			echo("<ul>\n");
@@ -45,21 +43,19 @@ function ShowModel($model_id){
 		$lvl--;
 		echo("</ul>\n");
 	}
-	
 }
 
 $pagetitle = "Модели";
 $tpl = "../templates/model/tpl_modelTree.php";
 include("../templates/tpl_main.php");
 
-$sql="SELECT tree_place FROM Model WHERE component_id =".$id_m."" ;
-$result = execute_select($pdo, $sql);
+$sql="SELECT tree_place FROM Model WHERE Id_M = {?}" ;
+$result = $db->select($sql, array($id_m));
 
 echo("<div class='center-block'>");
 echo("<ul class='tree-structure'>\n");
-while ( $row = $result->fetch() )
+foreach ($result as $row )
 	ShowModel($row["tree_place"]);			
 echo("</ul>\n");
 echo("</div>");
-
 ?>

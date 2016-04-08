@@ -17,8 +17,8 @@
 				</tr>
 				<?php foreach ($details as $detail):?>
 				<tr>
-					<td>  <?php echo $detail['Name'];?> </td>
-					<td> <?php echo $detail['Entities'];?></td>
+					<td>  <?php echo $detail['name'];?> </td>
+					<td> <?php echo $detail['entities'];?></td>
 				</tr>
 				<?php endforeach; ?>
 			</table>

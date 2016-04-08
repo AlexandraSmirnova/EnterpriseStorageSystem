@@ -21,7 +21,7 @@
                     <select id="detail1" class="form__input form__input_wide" name=id_d>
                         <?php
                         foreach ($details as $detail):
-                            echo("<option value = " . $detail['id'] . ">" . $detail['name'] . "</option>");
+                            echo("<option value = " . $detail['Id_C'] . ">" . $detail['Name'] . "</option>");
                         endforeach;
                         ?>
                     </select>

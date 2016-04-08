@@ -1,53 +1,41 @@
 <?php
-	include '../includes/dbconnect.php';
-	include '../includes/execute_select.php';
+	require('classes/dataBase.php');
+	$db = DataBase::getDB();
 	
 	if(isset($_GET['Info'])){
 		// если отправили уже из формы данные, то сохраняем новую закупку
-		include '../includes/inition.php';		
-		//if($id_s == 0  || id_d == 0){
-		//	exit();
-		//}
+		include '../includes/inition.php';
 		try{
-			$sql= "INSERT INTO invoice 
-						SET component=:id_d, supplier=:id_s, count=:count, item_cost=:cost, total_cost=0, date=:date";
-			$s=$pdo->prepare($sql);
-			$s->bindValue(':id_d', $_POST['id_d']);
-			$s->bindValue(':id_s', $_POST['id_s']);			
-			$s->bindValue(':count',  $_POST['count']);			
-			$s->bindValue(':cost', $_POST['cost']);		
-			$s->bindValue(':date', $_POST['date']);
-			$s->execute();
-			$id_i = $pdo->lastInsertId();
+			$query = "INSERT INTO invoice 
+						SET component={?}, supplier={?}, count={?}, item_cost={?}, total_cost=0, date={?}";
+			$id_i =  $db->query($query, array($_POST['id_d'], $_POST['id_s'], $_POST['count'], $_POST['cost'], $_POST['date']));
 						
 			include '../includes/procedures/totalCost.php';
 		}
-		catch (PDOexception $e){
+		catch (ErrorException $e){
 			$output = 'Ошибка при добавлении закупки в базу данных';
 			include '../includes/output.html.php';
 			exit(1);
 		}
 		
-		$sql = "SELECT Name FROM component WHERE Id_C = ".$id_d ;
-		$result = execute_select($pdo, $sql);
-		$detail = $result->fetch();
+		$sql = "SELECT Name FROM component WHERE Id_C = {?} " ;
+		$detail = $db->selectCell($sql, array($id_d));
 		
-		$sql = "SELECT name FROM supplier WHERE id = ".$id_s ;
-		$result = execute_select($pdo, $sql);
-		$supplier = $result->fetch(); 
+		$sql = "SELECT name FROM supplier WHERE id = {?}" ;
+		$supplier = $db->selectCell($sql, array($id_s));
 				
 		$pagetitle = "Поставка";
 		$tpl = "../templates/invoice/tpl_reportInvoice.php";
 		include("../templates/tpl_main.php");
-		
-		$pdo = null;
+
 		exit();	
 	}
 	
 	if(isset($_GET['Delete'])){
+		// если отменили поставку - удаляем запись.
 		$id_i = $_POST['id_i'];
-		$sql = "DELETE FROM invoice WHERE id_I = $id_i";
-		$result = execute_select($pdo, $sql);		
+		$sql = "DELETE FROM invoice WHERE id_I ={?}";
+		$result = $db->query($sql, array($id_i));
 	}
 	
 	if(isset($_GET['Success'])){
@@ -58,20 +46,11 @@
 	}
 	
 	$sql = "SELECT Id_C, Name FROM Component WHERE is_atom = 1" ;
-	$result = execute_select($pdo, $sql);
-		
-	while ( $row = $result->fetch() ) {
-		$details[]=array('id'=>$row['Id_C'], 'name'=>$row['Name']);
-	}
+	$details = $db->select($sql);
 	
 	$sql = "SELECT id, name FROM supplier" ;
-	$result = execute_select($pdo, $sql);
-		
-	while ( $row = $result->fetch() ) {
-		$suppliers[]=array('id'=>$row['id'], 'name'=>$row['name']);
-	}
+	$suppliers = $db->select($sql);
 	
-	$pdo = null;
 	$pagetitle = "Закупка";
 	$tpl = "../templates/invoice/tpl_newInvoice.php";
 	include("../templates/tpl_main.php");	

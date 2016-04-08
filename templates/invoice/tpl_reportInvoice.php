@@ -12,7 +12,7 @@
 			<table class="report-table" border="1">
 				<tr>
 					<td> Деталь </td>
-					<td><?php echo($detail['Name']);?></td>   
+					<td><?php echo($detail);?></td>
 				</tr> 
 						
 				<tr width=25%>
@@ -21,7 +21,7 @@
 				</tr> 
 				<tr>
 					<td> Поставщик </td>
-					<td> <?php echo($supplier['name']);?></td>   
+					<td> <?php echo($supplier);?></td>
 				</tr>
 				<tr> 
 					<td> Цена(1шт) </td>

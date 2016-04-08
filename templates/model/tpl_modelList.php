@@ -16,9 +16,9 @@
 				<td> Цена</td> 						
 			</tr><?php foreach ($models as $model):?>
 			<tr> 
-				<td> <?php echo $model['id'];?></td>
-				<td> <a href= <?php echo " ?id=".$model['id']."&name=".$model['name']."";?> > <?php echo $model['name'];?> </a></td>
-				<td> <?php echo $model['price'];?></td>						
+				<td> <?php echo $model['Id_M'];?></td>
+				<td> <a href= <?php echo " ?id=".$model['Id_M']."&name=".$model['Name']."";?> > <?php echo $model['Name'];?> </a></td>
+				<td> <?php echo $model['Cost'];?></td>
 			</tr><?php endforeach; ?>
 		</table>	
 	</div>

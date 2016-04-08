@@ -1,11 +1,11 @@
 <?php
-	include '../includes/dbconnect.php';
-	include '../includes/execute_select.php';
+	require('classes/dataBase.php');
+	$db = DataBase::getDB();
 	
 	function inventoryByDay($date){
-		global $pdo;
-		$sql = "SELECT name_c, count, time FROM tmp_storage_inventory WHERE TO_DAYS(time) -  TO_DAYS('$date') = 0";
-		$result = execute_select($pdo, $sql);
+		global $db;
+		$sql = "SELECT name_c, count, time FROM tmp_storage_inventory WHERE TO_DAYS(time) -  TO_DAYS({?}) = 0";
+		$result = $db->select($sql, array($date));
 		return $result;
 	}
 	
@@ -15,33 +15,22 @@
 		
 	if(isset($_GET['Info'])){
 		$date = $_POST['date'];		
-		$result = inventoryByDay($date);
+		$details = inventoryByDay($date);
 		
-		if(($result -> rowCount()) == 0){
+		if(count($details) == 0){
 			include '../includes/procedures/getInventoryByDay.php';
-			$result = inventoryByDay($date);
-		}
-		
-		while ( $row = $result->fetch() ) {
-			$details[]=array('name'=>$row['name_c'], 'count'=>$row['count'], 'time' => $row['time']);			
+			$details = inventoryByDay($date);
 		}
 		
 		$pagetitle = "Склад";
 		$tpl = "../templates/storage/tpl_storage.php";
-		include("../templates/tpl_main.php");		
-		$pdo = null;
+		include("../templates/tpl_main.php");
 		exit();		
 	}
 	
 	$sql = "SELECT name_c, count, time FROM tmp_storage_inventory WHERE time = (SELECT max(time) FROM tmp_storage_inventory)";
-	$result = execute_select($pdo, $sql);
-		
-	while ( $row = $result->fetch() ) {
-		$details[]=array('name'=>$row['name_c'], 'count'=>$row['count'], 'time' => $row['time']);
-	}		
-	
-	$pdo = null;
-			
+	$details = $db->select($sql);
+
 	$pagetitle = "Склад";
 	$tpl = "../templates/storage/tpl_storage.php";
 	include("../templates/tpl_main.php");		

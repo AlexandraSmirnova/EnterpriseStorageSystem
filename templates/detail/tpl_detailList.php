@@ -15,9 +15,9 @@
 				<td> Цена</td> 						
 			</tr><?php foreach ($details as $detail):?>
 			<tr> 
-				<td> <?php echo $detail['id'];?></td>
-				<td> <a href= <?php echo " ?id=".$detail['id']."&name=".$detail['name']."";?> > <?php echo $detail['name'];?> </a></td>
-				<td> <?php echo $detail['price'];?></td>						
+				<td> <?php echo $detail['Id_C'];?></td>
+				<td> <a href= <?php echo " ?id=".$detail['Id_C']."&name=".$detail['Name']."";?> > <?php echo $detail['Name'];?> </a></td>
+				<td> <?php echo $detail['Cost'];?></td>						
 			</tr><?php endforeach; ?>
 		</table>						
 	</div>

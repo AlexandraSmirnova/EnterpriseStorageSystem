@@ -6,18 +6,12 @@ if(isset($_GET['id'])){
 	include 'entitiesOfDetail.php';
 	exit();
 }
-	
-include( "../includes/dbconnect.php" ); 
-include( "../includes/execute_select.php" );
+
+require('classes/dataBase.php');
+$db = DataBase::getDB();
 
 $sql = "SELECT Id_C, Name, Cost from Component WHERE is_atom = 1" ;
-$result = execute_select($pdo, $sql);
-		
-while ( $row = $result->fetch() ) {
-	$details[]=array('id'=>$row['Id_C'], 'name'=>$row['Name'], 'price'=>$row['Cost']);
-}
-	
-$pdo = null;
+$details = $db->select($sql);
 
 $pagetitle = "Детали";
 $tpl = "../templates/detail/tpl_detailList.php";
