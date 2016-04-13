@@ -27,7 +27,7 @@
             </tr>
             <tr width=25%>
                 <td align=right> <label for="count1">Необходимое качество <br>обслуживания<br> P( < 1.0)<label></td>
-                <td align=left><input id="count1" class="form__input" type=number name=count min="0" max="1" step="0.01" required></td>
+                <td align=left><input id="count1" class="form__input" type=number name=t_param min="0" max="1" step="0.01" required></td>
             </tr>
             <tr>
                 <td align=center><input class="btn btn-primary" type=reset value="Очистить"></td>

@@ -5,12 +5,21 @@ include 'calculations/standartDeviation.php';
 
 if(isset($_GET['Info'])){
     $id = $_POST['id_m'];
+    $t_param = $_POST['t_param'];
+
     if (empty($id)) {
         $output = "Вы не указали модель";
         exit();
     }
+    if (empty($t_param)) {
+        echo "Не передали параметр";
+    }
     
     include 'compositeOfModel.php';
+    require('calculations/laplasTable.php');
+    $laplas = LaplasTable::getTable();
+    $sql = "SELECT sum(count) from production_plan Where id_model = {?}";
+    $plan_count = $db->selectCell($sql, array($id));
 
     for($i = 0; $i < count($details) ; $i++ ) {
         $difference = array();
@@ -28,7 +37,7 @@ if(isset($_GET['Info'])){
         $sigma = standartDeviation($difference);
 
         $details[$i] = array_merge($details[$i], array(
-            "reserve" => $sigma
+            "reserve" => $plan_count * ceil($sigma * $laplas->getParameter($t_param))
         ));
     }
 
