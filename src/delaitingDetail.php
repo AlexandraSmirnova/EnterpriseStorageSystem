@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('classes/dataBase.php');
+require('db_api/dataBase.php');
 $db = DataBase::getDB();
 
 if(isset($_GET['Info'])){

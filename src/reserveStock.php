@@ -1,27 +1,67 @@
 <?php
-require('classes/dataBase.php');
+require('db_api/dataBase.php');
 $db = DataBase::getDB();
 include 'calculations/standartDeviation.php';
+include 'db_api/getModelComposite.php';
+include 'db_api/getProductionPlan.php';
 
 if(isset($_GET['Info'])){
-    $id = $_POST['id_m'];
+    require('calculations/laplasTable.php');
+    $laplas = LaplasTable::getTable();
+    
     $t_param = $_POST['t_param'];
+    $date = $_POST['date'];
 
-    if (empty($id)) {
-        $output = "Вы не указали модель";
+    if (empty($date)) {
+        $output = "Вы не указали  месяц и год производства";
         exit();
     }
     if (empty($t_param)) {
         echo "Не передали параметр";
     }
     
-    include 'compositeOfModel.php';
-    require('calculations/laplasTable.php');
-    $laplas = LaplasTable::getTable();
-    $sql = "SELECT sum(count) from production_plan Where id_model = {?}";
-    $plan_count = $db->selectCell($sql, array($id));
+    $period_month = explode('-', $date);
+    #echo $period_month[0]." ";
+    #echo $period_month[1]." ";
 
-    for($i = 0; $i < count($details) ; $i++ ) {
+    $models = getProductionPlan($db, $period_month[1], $period_month[0]);
+
+    $details = array();
+
+    foreach( $models as $model) {
+        $id = $model['id_model'];
+        $plan_count = $model['count'];
+        echo $plan_count;
+
+        $details_of_model = getModelComposite($db, $id);
+        foreach ($details_of_model as $item ) {
+            $needle = $item["name"];
+            // поиск записи о детали в $details
+            $result = array_filter($details, function($innerArray){
+                global $needle;
+                //return in_array($needle, $innerArray);    //Поиск по всему массиву
+                return ($innerArray['name'] == $needle); //Поиск по первому значению
+            });
+
+
+            $indexes = array_keys($result);
+            $index = $indexes[0];
+
+            if (isset($index)) {
+                $details[$index]['entities'] += $item['entities'];
+                $details[$index]['required'] += $item['entities'] * $plan_count;
+            }
+            else {
+                $details[] = array_merge( $item, array('required' => $item['entities'] * $plan_count));
+            }
+        }
+    }
+
+    foreach ($details as $key => $value){
+        echo "<br>".$key." : ".$value['name']." - ".$value['required']."<br>";
+    }
+
+    for ($i = 0; $i < count($details); $i++) {
         $difference = array();
 
         $sql = "SELECT Id_C FROM component WHERE name={?}";
@@ -37,8 +77,13 @@ if(isset($_GET['Info'])){
         $sigma = standartDeviation($difference);
 
         $details[$i] = array_merge($details[$i], array(
-            "reserve" => $plan_count * ceil($sigma * $laplas->getParameter($t_param))
+            "reserve" => ceil($sigma * $laplas->getParameter($t_param))
         ));
+
+        //$required_details = $plan_count * $details[$i]['entities'];
+        //echo $details[$i]['entities'];
+        //$sql = "INSERT INTO reserve_stock SET id_component = {?}, month = MONTH(CURRENT_DATE), year = YEAR(CURRENT_DATE), demand_forecast = {?}, reserve_stock = {?}";
+        //$last_id = $db->query($sql, array($id_C, $required_details , $details[$i]['reserve']));
     }
 
     $pagetitle = "Страховой запас";

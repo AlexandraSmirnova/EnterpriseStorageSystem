@@ -1,12 +1,18 @@
 <?php
-require('classes/dataBase.php');
+require('db_api/dataBase.php');
 $db = DataBase::getDB();
 
 if(isset($_GET['id'])){
 	$id = $_GET['id'];	
 	$model = $_GET['name'];
-	include 'compositeOfModel.php';
 	
+	include 'db_api/getModelComposite.php';
+	$details = getModelComposite($db, $id);
+	
+	if(empty($details)){
+		$output = "В модели еще не используется ни одной детали";
+	}
+
 	$pagetitle = "Модели";
 	$tpl = "../templates/model/tpl_modelContents.php";
 	include("../templates/tpl_main.php");

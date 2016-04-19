@@ -1,9 +1,9 @@
 <?php
-require('classes/dataBase.php');
+include('db_api/getEntitiesOfDetail.php');
+require('db_api/dataBase.php');
 $db = DataBase::getDB();
 
-$sql = "SELECT id, name, parent, entities from tmp_detail_info WHERE name = {?}" ;
-$details = $db->select($sql, array($detail));
+$details = getEntitiesOfDetail($db, $detail);
 		
 if(empty($details)){
 	$output = "Деталь не используется ни в одной из моделей";	

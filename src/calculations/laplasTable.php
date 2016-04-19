@@ -16,12 +16,10 @@ class LaplasTable {
         $precision = 0.001;
         self::$laplasArray['t'] = array();
         self::$laplasArray['f'] = array();
-        $i = 0;
         for ( $t = 0.0 ; $t < 3.99 ; $t += 0.02 ){
             self::$laplasArray['t'][] = $t;
             self::$laplasArray['f'][] = $this->calculateLaplas($t, $precision);
             //echo self::$laplasArray['t'][$i]." : ".self::$laplasArray['f'][$i]."<br>";
-            $i++;
         }
     }
 

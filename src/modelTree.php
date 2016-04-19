@@ -9,7 +9,7 @@ else{
 	exit();
 }
 
-require('classes/dataBase.php');
+require('db_api/dataBase.php');
 $db = DataBase::getDB();
 /**
  * @param $model_id

@@ -7,7 +7,7 @@ if(isset($_GET['id'])){
 	exit();
 }
 
-require('classes/dataBase.php');
+require('db_api/dataBase.php');
 $db = DataBase::getDB();
 
 $sql = "SELECT Id_C, Name, Cost from Component WHERE is_atom = 1" ;

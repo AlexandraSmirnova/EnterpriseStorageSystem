@@ -1,5 +1,5 @@
 <?php
-	require('classes/dataBase.php');
+	require('db_api/dataBase.php');
 	$db = DataBase::getDB();
 	
 	function inventoryByDay($date){
