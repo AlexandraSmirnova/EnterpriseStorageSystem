@@ -5,7 +5,7 @@ $db = DataBase::getDB();
 
 if(isset($_GET['Info'])){
 	$_SESSION['model'] =  $_POST['id'];	
-	$sql = "SELECT Name FROM Component WHERE Id_C = {?}";
+	$sql = "SELECT Name FROM component WHERE Id_C = {?}";
 	$_SESSION['model_name'] = $db->selectCell($sql, array($_SESSION['model']));
 }
 
@@ -76,7 +76,7 @@ if(isset($_GET['Ok'])){
 }
 
 if(!isset($_SESSION['model'])){
-	$sql = "SELECT Id_C, Name FROM Component WHERE is_atom != 1" ;
+	$sql = "SELECT Id_C, Name FROM component WHERE is_atom != 1" ;
 	$models = $db->select($sql);
 
 	$pagetitle = "Cписание деталей";

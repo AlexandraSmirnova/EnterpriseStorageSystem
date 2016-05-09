@@ -10,7 +10,7 @@ if(isset($_GET['id'])){
 require('db_api/dataBase.php');
 $db = DataBase::getDB();
 
-$sql = "SELECT Id_C, Name, Cost from Component WHERE is_atom = 1" ;
+$sql = "SELECT Id_C, Name, Cost from component WHERE is_atom = 1" ;
 $details = $db->select($sql);
 
 $pagetitle = "Детали";

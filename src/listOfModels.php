@@ -20,7 +20,7 @@ if(isset($_GET['id'])){
 }
 
 //$sql = "SELECT Id_C, Name, Cost from Component WHERE Id_C IN (SELECT child FROM structure WHERE parent = 0)" ;
-$sql = "SELECT Id_M, m.Name, Cost FROM Model m JOIN Component c WHERE Id_C = component_id;";
+$sql = "SELECT Id_M, m.Name, Cost FROM model m JOIN component c WHERE Id_C = component_id;";
 $models = $db->select($sql);
 
 $pagetitle = "Модели";

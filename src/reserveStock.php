@@ -92,7 +92,7 @@ if(isset($_GET['Info'])){
     exit();
 }
 
-$sql = "SELECT Id_M, Name FROM Model";
+$sql = "SELECT Id_M, Name FROM model";
 $models = $db->select($sql);
 
 $pagetitle = "Страховой запас";

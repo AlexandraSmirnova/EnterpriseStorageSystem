@@ -49,7 +49,7 @@ $pagetitle = "Модели";
 $tpl = "../templates/model/tpl_modelTree.php";
 include("../templates/tpl_main.php");
 
-$sql="SELECT tree_place FROM Model WHERE Id_M = {?}" ;
+$sql="SELECT tree_place FROM model WHERE Id_M = {?}" ;
 $result = $db->select($sql, array($id_m));
 
 echo("<div class='center-block'>");
