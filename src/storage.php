@@ -1,15 +1,15 @@
 <?php
-	require('classes/dataBase.php');
+	require('db_api/dataBase.php');
 	$db = DataBase::getDB();
 	
-	function inventoryByDay($date){
+	function inventoryByDay($date) {
 		global $db;
 		$sql = "SELECT name_c, count, time FROM tmp_storage_inventory WHERE TO_DAYS(time) -  TO_DAYS({?}) = 0";
 		$result = $db->select($sql, array($date));
 		return $result;
 	}
 	
-	if(isset($_GET['Inventory'])){
+	if(isset($_GET['Inventory'])) {
 		include '../includes/procedures/storageToday.php';
 	}
 		
@@ -17,7 +17,7 @@
 		$date = $_POST['date'];		
 		$details = inventoryByDay($date);
 		
-		if(count($details) == 0){
+		if(count($details) == 0) {
 			include '../includes/procedures/getInventoryByDay.php';
 			$details = inventoryByDay($date);
 		}

@@ -13,7 +13,7 @@ class DataBase {
 
     /* private-конструктор, подключающийся к базе данных, устанавливающий локаль и кодировку соединения */
     private function __construct() {
-        $this->mysqli = new mysqli("localhost", "root", "", "car_enterprise");
+        $this->mysqli = new mysqli("localhost", "admin", "admin", "car_enterprise");
         $this->mysqli->query("SET lc_time_names = 'ru_RU'");
         $this->mysqli->query("SET NAMES 'utf8'");
     }

@@ -1,5 +1,5 @@
 <?php
-	require('classes/dataBase.php');
+	require('db_api/dataBase.php');
 	$db = DataBase::getDB();
 	
 	if(isset($_GET['Info'])){
@@ -45,7 +45,7 @@
 		exit();
 	}
 	
-	$sql = "SELECT Id_C, Name FROM Component WHERE is_atom = 1" ;
+	$sql = "SELECT Id_C, Name FROM component WHERE is_atom = 1" ;
 	$details = $db->select($sql);
 	
 	$sql = "SELECT id, name FROM supplier" ;
