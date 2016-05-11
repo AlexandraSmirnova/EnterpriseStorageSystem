@@ -1,4 +1,5 @@
 <?php
+//TODO: добавить в списание зависимость от количества
 	require('db_api/dataBase.php');
 	$db = DataBase::getDB();
 	
@@ -7,7 +8,7 @@
 		include '../includes/inition.php';
 		try{
 			$query = "INSERT INTO invoice 
-						SET component={?}, supplier={?}, count={?}, item_cost={?}, total_cost=0, date={?}";
+						SET component={?}, supplier={?}, count={?}, item_cost={?}, total_cost=0, order_date=CURRENT_DATE, plan_date={?}";
 			$id_i =  $db->query($query, array($_POST['id_d'], $_POST['id_s'], $_POST['count'], $_POST['cost'], $_POST['date']));
 						
 			include '../includes/procedures/totalCost.php';

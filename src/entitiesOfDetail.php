@@ -1,5 +1,5 @@
 <?php
-include('db_api/getEntitiesOfDetail.php');
+include('db_api/getDetailInfo.php');
 require('db_api/dataBase.php');
 $db = DataBase::getDB();
 
