@@ -28,8 +28,9 @@
             <tr>
             <td> <a href= <?php echo "listOfModels.php?id=".$model['id_model']."&name=".$model['name']."";?> > <?php echo $model['name'];?> </a></td>
             <td> <?php echo $model['count'];?></td>
-            <td> <?php echo $model['date'];?></td>
+            <td> <?php echo $model['start_production'];?></td>
             </tr><?php endforeach; ?>
     </table>
+    <a class="btn btn-primary" href=" ?orders">Спланировать закупки</a>
 </div>
 </html>
