@@ -93,6 +93,7 @@ else{
 	
 	// если модель - вернется пустой результат 
 	if((count($details)) == 0){
+		// TODO: fix it for model! + check inventarization!
 		$sql="SELECT  Name, Entities, count FROM tmp_detail_info JOIN tmp_storage_inventory ON Name = name_c 
 													WHERE parent_id = (SELECT tree_place FROM Model WHERE component_id = {?}) 
 													AND time = (SELECT max(time) FROM tmp_storage_inventory)" ;

@@ -22,4 +22,10 @@ function getDetailReserveStock($db, $detail_id, $month, $year) {
     return $db->selectCell($sql, array($detail_id, $month, $year));
 }
 
+function getPotentialSupplierId($db, $detail_id) {
+    $sql = "SELECT id_s FROM component_supplier WHERE id_c = {?} AND priority IN (            
+                SELECT MAX( priority ) FROM (                
+                  SELECT priority FROM component_supplier WHERE id_c = {?} )A ) LIMIT 0, 1";
+    return $db->selectCell($sql, array($detail_id, $detail_id));
+}
 ?>

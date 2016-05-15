@@ -83,6 +83,9 @@ if(isset($_GET['orders'])) {
         else {
             $order_days =  $default_period;
         }
+        if(!$supplier_id) {
+            $supplier_id = getPotentialSupplierId($db, $id_c);
+        }
         $supplier = getSupplierName($db, $supplier_id);
         $date_order = new DateTime($detail['date_required']);
         $date_order->modify('-'.$order_days.' day');
