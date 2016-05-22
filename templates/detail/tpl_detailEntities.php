@@ -1,10 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<div class="top-menu">
-		<a href = "index.php" >Главная</a>->
-		<a href= "listOfDetails.php" >Детали</a>->
-		<a href= "" ><?php echo $detail?></a>
-	</div>
-	<hr>	
+		<span class="top-menu__item">
+			<a href = "index.php" >Главная</a>
+		</span> >
+		<span class="top-menu__item">
+			<a href= "listOfDetails.php" >Детали</a> 
+		</span> >
+		<span class="top-menu__item">
+			<a href= "" ><?php echo $detail?></a>
+		</span>
+	</div>		
+	
 	<div class="title">
 		<h3>Использование детали</h3>
 	</div>

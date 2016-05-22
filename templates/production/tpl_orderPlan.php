@@ -1,9 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <div class="top-menu">
-    <a href = "index.php" >Главная</a>->
-    <a href= "" >План производства</a>
+    <span class="top-menu__item">
+        <a href = "index.php" >Главная</a>
+    </span> >
+    <span class="top-menu__item">   
+        <a href= "" >План производства</a>
+    </span>
 </div>
-<hr>
 
 <div class="title">
     <h2>План закупок</h2>

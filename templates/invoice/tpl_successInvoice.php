@@ -1,6 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<div class="top-menu">
-		<a href = "index.php" >Главная</a>
+		<span class="top-menu__item">
+        	<a href="index.php">Главная</a>
+    	</span>
 	</div>
 	<hr>	
 	<div class="center-block">

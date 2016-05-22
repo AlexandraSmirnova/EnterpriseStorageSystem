@@ -1,9 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<div class="top-menu">
-		<a href = "index.php" >Главная</a>->			
-		<a href= "" > Списание деталей </a> 
+		<span class="top-menu__item">
+			<a href = "index.php" >Главная</a>
+		</span> >
+		<span class="top-menu__item">
+			<a href= "" > Списание деталей </a>
+		</span>
 	</div>
-	<hr>	
+		
 	<div class="center-block">	
 		<div class="title">
 			<h3>Выберите модель или подсистему</h3>
