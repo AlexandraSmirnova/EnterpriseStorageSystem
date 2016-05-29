@@ -3,6 +3,8 @@ require('db_api/dataBase.php');
 $db = DataBase::getDB();
 include 'calculations/standartDeviation.php';
 include 'db_api/getModelInfo.php';
+include 'db_api/getProductionPlan.php';
+
 include 'db_api/getDetailInfo.php';
 
 if(isset($_GET['Info'])){
@@ -26,7 +28,7 @@ if(isset($_GET['Info'])){
 
     $models = getProductionPlan($db, $period_month[1], $period_month[0]);
 
-    include 'includes/detailsFromPlan.php';
+    include '../includes/detailsFromPlan.php';
     
     for ($i = 0; $i < count($details); $i++) {
         $difference = array();

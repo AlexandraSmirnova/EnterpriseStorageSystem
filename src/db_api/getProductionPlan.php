@@ -1,6 +1,6 @@
 <?php
 function getProductionPlan($db, $month, $year){
-    $sql = "SELECT id_model, sum(count) count, start_production FROM production_plan WHERE MONTH(start_production) = {?} AND YEAR(start_production) = {?} GROUP BY id_model";
+    $sql = "SELECT id_model, sum(count) count, start_production FROM production_plan WHERE MONTH(start_production) = {?} AND YEAR(start_production) = {?} GROUP BY id_model, start_production";
     $models = $db->select($sql, array($month, $year));
     return $models;
 }
