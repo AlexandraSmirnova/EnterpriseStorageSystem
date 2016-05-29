@@ -23,7 +23,7 @@ function getPlanCurrentMonth($db) {
             JOIN model
             WHERE id_model = Id_M
             AND MONTH(start_production) = MONTH(CURRENT_DATE) AND start_production > CURRENT_DATE 
-            GROUP BY id_model" ;
+            GROUP BY id_model, start_production" ;
     return $db->select($sql);
 }
 ?>

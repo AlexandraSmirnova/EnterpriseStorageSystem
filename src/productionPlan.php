@@ -4,7 +4,7 @@ $db = DataBase::getDB();
 include 'db_api/getDetailInfo.php';
 include 'db_api/getProductionPlan.php';
 include 'db_api/getSupplierName.php';
-include 'db_api/getModelComposite.php';
+include 'db_api/getModelInfo.php';
 
 if(isset($_GET['Info'])) {
     $date = $_POST['date'];
@@ -101,12 +101,12 @@ if(isset($_GET['orders'])) {
         }
     }
 
-    $pagetitle = "План заказов";
+    $pagetitle = "План закупок";
     $tpl = "../templates/production/tpl_orderPlan.php";
     include("../templates/tpl_main.php");
     exit();
 }
-
+$all_models=getModelList($db);
 
 $pagetitle = "План производства";
 $tpl = "../templates/production/tpl_productionPlan.php";

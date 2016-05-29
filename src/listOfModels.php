@@ -6,7 +6,7 @@ if(isset($_GET['id'])){
 	$id = $_GET['id'];	
 	$model = $_GET['name'];
 	
-	include 'db_api/getModelComposite.php';
+	include 'db_api/getModelInfo.php';
 	$details = getModelComposite($db, $id);
 	
 	if(empty($details)){

@@ -2,7 +2,7 @@
 require('db_api/dataBase.php');
 $db = DataBase::getDB();
 include 'calculations/standartDeviation.php';
-include 'db_api/getModelComposite.php';
+include 'db_api/getModelInfo.php';
 include 'db_api/getDetailInfo.php';
 
 if(isset($_GET['Info'])){
@@ -65,8 +65,7 @@ if(isset($_GET['Info'])){
     exit();
 }
 
-$sql = "SELECT Id_M, Name FROM model";
-$models = $db->select($sql);
+$models = getModelList($db);
 
 $pagetitle = "Страховой запас";
 $tpl = "../templates/invoice/tpl_reserveForm.php";
