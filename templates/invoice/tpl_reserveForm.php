@@ -1,10 +1,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <div class="top-menu">
-    <a href="index.php">Главная</a>->
-    <a href="newInvoice.php"> Поставка </a> ->
-    <a href=""> Страховой запас </a>
+    <span class="top-menu__item">
+        <a href="index.php">Главная</a>
+    </span> >
+    <span class="top-menu__item">
+        <a href="newInvoice.php"> Поставка </a> 
+    </span> >
+    <span class="top-menu__item">
+        <a href=""> Страховой запас </a>
+    </span>
 </div>
-<hr>
+
 <div class="title">
     <h2> Расчет страхового запаса </h2>
 </div>

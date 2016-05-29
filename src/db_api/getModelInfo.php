@@ -4,4 +4,9 @@ function getModelComposite($db, $model_id) {
     $details = $db->select($sql, array($model_id));
     return $details;
 }
+
+function getModelList($db) {
+    $sql = "SELECT Id_M, Name FROM model";
+    return $db->select($sql);
+}
 ?>

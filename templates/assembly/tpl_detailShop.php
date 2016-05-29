@@ -1,10 +1,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<div class="top-menu">
-		<a href = "index.php" >Главная</a>->
-		<a  onclick="location.href=' ?Del'">Списание деталей</a>->
-		<?php echo $model_name?>
+		<span class="top-menu__item">
+			<a href = "index.php" >Главная</a>
+		</span> >
+		<span class="top-menu__item">
+			<a  onclick="location.href=' ?Del'">Списание деталей</a>
+		</span> >
+		<span class="top-menu__item">
+			<?php echo $model_name?>
+		</span>
 	</div>
-	<hr>
 	<div class="center-block">	
 		<div class="title">
 			<h3>Выберите необходимые детали</h3>

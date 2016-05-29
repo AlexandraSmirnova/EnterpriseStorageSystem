@@ -2,8 +2,10 @@
 	<head>
 		<meta charset="utf-8">
 		<title><?=$pagetitle?></title>
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/main.css">		
+		<script src="../../static/js/lib/jquery.js"></script>
+		<script src="../../static/js/lib/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/main.css">		
 	</head>
 	<body>
 		<div id="page">

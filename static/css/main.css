@@ -1,0 +1,33 @@
+body { background-color: #afdfdf; color: #444; }
+
+td { padding: 15px; }
+
+hr { margin: 0; }
+
+.menu__item { min-width: 280px; font-size: 24px; color: #F3F3F3; background-color: #4369BE; margin-bottom: 10px; border-color: #86AAFE; border-radius: 10px; }
+.menu__item:hover { color: #ffffff; background-color: #0C3AA5; text-decoration: none; }
+
+.top-menu { padding: 10px 30px; font-size: 22px; background: rgb(32, 32, 32); color: lightcyan; min-height: 60px; }
+.top-menu .top-menu__item { min-width: 100px; display: inline-block; text-align: center; }
+.top-menu a { color: #D3D3D3; font-size: 20px; }
+.top-menu a:hover { color: #F5F5F5; font-weight: bolder; text-decoration: none; }
+
+
+.title { text-align: center; margin: 30px; }
+
+.center-block { text-align: center; width: 50%; }
+
+.center-block__row { text-align: center; }
+
+.left-block { position: absolute; margin: 0 20px; }
+
+.report-table { margin: 0 auto 5px; text-align: center; background-color: #FFD278; }
+
+.form__input { border-radius: 5px; height: 35px; min-width: 100px; }
+.form__input_wide { width: 100%; }
+.form__select { border-radius: 5px; height: 35px; }
+
+.tree-structure{ margin: 0 auto; text-align: left; background-color: #FFD278; width: 50%; border-radius: 10px; }
+
+.errors{ background-color: #ffbcad; color: #f34723; border: 1px solid #f34723; border-radius: 5px; font-size: 20px; display: inline-block; padding: 5px; margin: 5px; }
+
