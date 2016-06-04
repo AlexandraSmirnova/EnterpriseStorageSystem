@@ -14,7 +14,7 @@
 		</div>
 		<form action =" ?Info"  method="POST">		
 			<div class="center-block__row row">
-				<select class="form__select" name=id>								
+				<select class="form__select form__select_wide" name=id>
 					<?php 
 						foreach ($models as $model):
 							echo("<option value = ".$model['Id_C'].">".$model['Name']."</option>");

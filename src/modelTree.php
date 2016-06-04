@@ -53,9 +53,11 @@ $sql="SELECT tree_place FROM model WHERE Id_M = {?}" ;
 $result = $db->select($sql, array($id_m));
 
 echo("<div class='center-block'>");
-echo("<ul class='tree-structure'>\n");
+echo("<div class='tree-structure'>");
+echo("<ul>\n");
 foreach ($result as $row )
 	ShowModel($row["tree_place"]);			
 echo("</ul>\n");
+echo("</div>");
 echo("</div>");
 ?>

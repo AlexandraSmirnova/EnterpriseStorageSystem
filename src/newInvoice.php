@@ -8,13 +8,13 @@
 		include '../includes/inition.php';
 		try{
 			$query = "INSERT INTO invoice 
-						SET component={?}, supplier={?}, count={?}, item_cost={?}, total_cost=0, order_date=CURRENT_DATE, plan_date={?}";
-			$id_i =  $db->query($query, array($_POST['id_d'], $_POST['id_s'], $_POST['count'], $_POST['cost'], $_POST['date']));
+						SET component={?}, supplier={?}, count={?}, item_cost={?}, total_cost=0, order_date=CURRENT_DATE, plan_date={?}, completion_date={?}";
+			$id_i =  $db->query($query, array($_POST['id_d'], $_POST['id_s'], $_POST['count'], $_POST['cost'], $_POST['date'], $_POST['date']));
 						
 			include '../includes/procedures/totalCost.php';
 		}
 		catch (ErrorException $e){
-			$output = 'Ошибка при добавлении закупки в базу данных';
+			$output = 'Ошибка при добавлении поставки в базу данных';
 			include '../includes/output.html.php';
 			exit(1);
 		}
@@ -52,7 +52,7 @@
 	$sql = "SELECT id, name FROM supplier" ;
 	$suppliers = $db->select($sql);
 	
-	$pagetitle = "Закупка";
+	$pagetitle = "Поставка";
 	$tpl = "../templates/invoice/tpl_newInvoice.php";
 	include("../templates/tpl_main.php");	
 ?>

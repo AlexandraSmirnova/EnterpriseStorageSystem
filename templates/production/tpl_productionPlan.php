@@ -35,7 +35,7 @@
                 </tr><?php endforeach; ?>
         </table>
         <div class="center-block__row row">
-            <a class="btn btn-primary" href=" ?orders">Спланировать закупки</a>
+            <a class="btn btn-primary" href=" ?orders">Спланировать поставки</a>
             <a class="btn btn-primary add-btn">Добавить</a>
         </div>
     </div>
