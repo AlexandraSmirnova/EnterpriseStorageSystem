@@ -6,13 +6,13 @@
     <span class="top-menu__item">
         <a href=""> Поставка </a>
     </span>
+    <span class="top-menu__btn">
+        <a class="btn btn-default" href="reserveStock.php">Расчитать страховой запас</a>
+    </span>
 </div>
 
 <div class="title">
     <h2> Поставка деталей </h2>
-</div>
-<div class="left-block">
-    <a class="btn btn-default" href="reserveStock.php">Расчитать страховой запас</a>
 </div>
 
 <div class="center-block">
@@ -56,7 +56,7 @@
                 <td align=left><input id="date1" class="form__input form__input_wide" type=date name=date required></td>
             </tr>
             <tr>
-                <td align=center><input class="btn btn-primary" type=reset value="Очистить"></td>
+                <td align=right><input class="btn btn-primary" type=reset value="Очистить"></td>
                 <td align=center><input class="btn btn-primary" type=submit name=send value="Отправить"></td>
             </tr>
         </table>

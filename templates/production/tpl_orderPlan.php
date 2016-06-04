@@ -9,7 +9,7 @@
 </div>
 
 <div class="title">
-    <h2>План закупок</h2>
+    <h2>План поставок</h2>
 </div>
 <div class="center-block">
     <?php if($error_str): ?>
