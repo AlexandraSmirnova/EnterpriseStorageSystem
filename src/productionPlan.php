@@ -102,6 +102,7 @@ if(isset($_GET['orders'])) {
     }
 
     // сортировка результата по дате
+    //matrixSort($new_details, 'date_order');
     $by = 'date_order';
     usort($new_details, function($first, $second) use( $by  ) {
         if ($first[$by]>$second[$by]) { return 1; }
@@ -114,6 +115,15 @@ if(isset($_GET['orders'])) {
     include("../templates/tpl_main.php");
     exit();
 }
+
+// сортировка результата по дате
+$by = 'start_production';
+usort($models, function($first, $second) use( $by  ) {
+    if ($first[$by]>$second[$by]) { return 1; }
+    elseif ($first[$by]<$second[$by]) { return -1; }
+    return 0;
+});
+
 
 $all_models=getModelList($db);
 
