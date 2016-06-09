@@ -4,7 +4,10 @@
         <a href = "index.php" >Главная</a>
     </span> >
     <span class="top-menu__item">   
-        <a href= "productionPlan.php" >План производства</a>
+        <a href= "productionPlan.php">План производства</a>
+    </span> >
+    <span class="top-menu__item">
+        <a href= "productionPlan.php">План поставок</a>
     </span>
 </div>
 

@@ -8,7 +8,7 @@ hr { margin: 0; }
 .menu__item:hover { color: #ffffff; background-color: #0C3AA5; text-decoration: none; }
 
 .top-menu { padding: 10px 30px; font-size: 22px; background: rgb(32, 32, 32); color: lightcyan; min-height: 60px; }
-.top-menu .top-menu__item { min-width: 100px; display: inline-block; text-align: center; }
+.top-menu .top-menu__item { min-width: 100px; display: inline-block; text-align: center;}
 .top-menu .top-menu__item a { color: #D3D3D3; font-size: 20px; }
 .top-menu .top-menu__item a:hover { color: #F5F5F5; font-weight: bolder; text-decoration: none; }
 .top-menu .top-menu__btn { float: right; }
